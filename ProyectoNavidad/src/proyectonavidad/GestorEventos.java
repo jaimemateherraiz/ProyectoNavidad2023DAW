@@ -4,8 +4,11 @@ package proyectonavidad;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+
 
 public class GestorEventos {
 
@@ -24,7 +27,7 @@ public class GestorEventos {
                     // Establecer los parámetros utilizando setXXX según el tipo de datos en la base de datos
                     preparedStatement.setString(1, nombre);
                     preparedStatement.setString(2, descripcion);
-                    preparedStatement.setDate(3, fecha);
+                    preparedStatement.setString(3, fecha);
                     preparedStatement.setString(4, tipoevento);
                     preparedStatement.setString(5, organizador);
                     preparedStatement.setString(6, ubicacion);
@@ -43,4 +46,47 @@ public class GestorEventos {
             e.printStackTrace();
         }
     }
+
+    
+    public static void mostrarEventos() {
+        
+        DefaultTableModel meventos = new DefaultTableModel();
+        meventos.addColumn("NOMBRE");
+        meventos.addColumn("DESCRIPCIÓN");
+        meventos.addColumn("FECHA");
+        meventos.addColumn("TIPO");
+        meventos.addColumn("ORGANIZADOR");
+        meventos.addColumn("UBICACIÓN");
+        
+        
+        
+        
+        
+        
+        
+        
+        /*try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Ahora establezco la conexión
+            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
+                // Preparo una petición a la base de datos
+                Statement peticion = conexion.createStatement();
+                // A continuación le pedimos algo a una base de datos 
+                ResultSet resultado = peticion.executeQuery("SELECT NombreEvento, Descripcion, Fecha, Tipoevento, Organizador FROM eventos WHERE Ubicacion = Ubicacion;");
+
+                // Mientras el resultado tenga líneas, agrega los nombres al modelo de lista
+                while (resultado.next()) {
+                    System.out.println(resultado.getString(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+    }
+    
+    
+    
+    
+    
+   
 }

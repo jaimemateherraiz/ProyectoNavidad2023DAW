@@ -3,7 +3,12 @@ package proyectonavidad;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.table.DefaultTableModel;
 
 public class GestorUsuarios {
 
@@ -41,5 +46,25 @@ public class GestorUsuarios {
             e.printStackTrace();
         }
     }
-}
+    
+    public static void listaDonantes() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Ahora establezco la conexión
+            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
+                // Preparo una petición a la base de datos
+                Statement peticion = conexion.createStatement();
+                // A continuación le pedimos algo a una base de datos 
+                ResultSet resultado = peticion.executeQuery("SELECT Nombre FROM usuarios WHERE TipoUsuario = 'Donante';");
+                // Mientras el resultado tenga líneas, agrega los nombres al modelo de lista
+                while (resultado.next()) {
+                    System.out.println(resultado.getString(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 
+}
