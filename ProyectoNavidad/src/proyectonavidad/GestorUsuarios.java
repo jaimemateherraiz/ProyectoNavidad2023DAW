@@ -17,37 +17,43 @@ public class GestorUsuarios {
     private static final String CONTRASENA = "zonasolidaria";
 
     public static void registrarUsuario(String nombre, String apellidos, String correo, String telefono, String municipio, String tipoUsuario) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Establecer la conexión
-            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
-                // Preparar la consulta utilizando PreparedStatement
-                String query = "INSERT INTO usuarios (Nombre, Apellidos, CorreoElectronico, TelefonoMovil, Municipio, TipoUsuario) VALUES (?, ?, ?, ?, ?, ?)";
-                try (PreparedStatement preparedStatement = conexion.prepareStatement(query)) {
-                    // Establecer los parámetros utilizando setXXX según el tipo de datos en la base de datos
-                    preparedStatement.setString(1, nombre);
+        try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
+            // Validar datos antes de realizar la inserción
+            if (nombre == null || apellidos == null || correo == null || telefono == null || municipio == null || tipoUsuario == null) {
+                System.out.println("Por favor, complete todos los campos antes de registrar el usuario");
+                return;
+            }
+
+            // Crear la consulta de inserción
+            String query = "INSERT INTO usuarios (Nombre, Apellidos, CorreoElectronico, TelefonoMovil, Municipio, TipoUsuario) VALUES (?, ?, ?, ?, ?, ?)";
+
+            try (PreparedStatement preparedStatement = conexion.prepareStatement(query)) {
+                // Establecer los parámetros utilizando setXXX según el tipo de datos en la base de datos
+                preparedStatement.setString(1, nombre);
                     preparedStatement.setString(2, apellidos);
                     preparedStatement.setString(3, correo);
                     preparedStatement.setString(4, telefono);
                     preparedStatement.setString(5, municipio);
                     preparedStatement.setString(6, tipoUsuario);
 
-                    // Ejecutar la consulta de inserción
-                    int filasAfectadas = preparedStatement.executeUpdate();
+                // Ejecutar la consulta de inserción
+                int filasAfectadas = preparedStatement.executeUpdate();
 
-                    if (filasAfectadas > 0) {
-                        System.out.println("Usuario registrado correctamente en la base de datos");
-                    } else {
-                        System.out.println("No se pudo registrar el usuario en la base de datos");
-                    }
+                if (filasAfectadas > 0) {
+                    System.out.println("Usuario registrado correctamente en la base de datos");
+                } else {
+                    System.out.println("No se pudo registrar el usuario en la base de datos");
                 }
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
+            System.err.println("Error al registrar el evento en la base de datos:");
             e.printStackTrace();
         }
+
     }
-    
-    public static void listaDonantes() {
+        
+    // con este codigo lo saco por consola
+    /*public static void listaDonantes() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Ahora establezco la conexión
@@ -55,7 +61,7 @@ public class GestorUsuarios {
                 // Preparo una petición a la base de datos
                 Statement peticion = conexion.createStatement();
                 // A continuación le pedimos algo a una base de datos 
-                ResultSet resultado = peticion.executeQuery("SELECT Nombre FROM usuarios WHERE TipoUsuario = 'Donante';");
+                ResultSet resultado = peticion.executeQuery("SELECT Nombre, Apellidos FROM usuarios WHERE TipoUsuario = 'Donante';");
                 // Mientras el resultado tenga líneas, agrega los nombres al modelo de lista
                 while (resultado.next()) {
                     System.out.println(resultado.getString(1));
@@ -64,7 +70,59 @@ public class GestorUsuarios {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
     
+    public static void listaDonantes(DefaultListModel<String> listModel) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Ahora establezco la conexión
+            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
+                // Preparo una petición a la base de datos
+                Statement peticion = conexion.createStatement();
+                // A continuación le pedimos algo a una base de datos 
+                ResultSet resultado = peticion.executeQuery("SELECT Nombre, Apellidos FROM usuarios WHERE TipoUsuario = 'Donante';");
+                // Mientras el resultado tenga líneas, agrega los nombres y apellidos al modelo de lista
+                while (resultado.next()) {
+                    //He verificado que si salen por consola
+                    System.out.println(resultado.getString("Nombre") + " | " + resultado.getString("Apellidos"));
+
+                    //No me salen en el jList
+                    String nombreCompleto = resultado.getString("Nombre") + " " + resultado.getString("Apellidos");
+                    listModel.addElement(nombreCompleto);
+                }
+            }
+        }   catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    public static void borrarUsuario(String nombreUsuario) {
+        String url = "jdbc:mysql://localhost:3306/zonasolidaria";
+        String usuarioDB = "zonasolidaria";
+        String contrasenaDB = "zonasolidaria";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
+                String sql = "DELETE FROM usuarios WHERE Nombre = ?";
+                try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+                    preparedStatement.setString(1, nombreUsuario);
+
+                    int filasAfectadas = preparedStatement.executeUpdate();
+
+                    if (filasAfectadas > 0) {
+                        System.out.println("Usuario eliminado correctamente");
+                    } else {
+                        System.out.println("No se encontró el usuario o no se pudo eliminar");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
+
+

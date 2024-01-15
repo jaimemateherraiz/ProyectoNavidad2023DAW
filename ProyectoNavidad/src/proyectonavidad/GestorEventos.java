@@ -17,76 +17,86 @@ public class GestorEventos {
     private static final String CONTRASENA = "zonasolidaria";
 
     public static void registrarEvento(String nombre, String descripcion, String fecha, String tipoevento, String organizador, String ubicacion) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Establecer la conexión
-            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
-                // Preparar la consulta utilizando PreparedStatement
-                String query = "INSERT INTO eventos (NombreEvento, Descripcion, Fecha, Tipoevento, OrganizadorID, UbicacionID) VALUES (?, ?, ?, ?, ?, ?)";
-                try (PreparedStatement preparedStatement = conexion.prepareStatement(query)) {
-                    // Establecer los parámetros utilizando setXXX según el tipo de datos en la base de datos
-                    preparedStatement.setString(1, nombre);
-                    preparedStatement.setString(2, descripcion);
-                    preparedStatement.setString(3, fecha);
-                    preparedStatement.setString(4, tipoevento);
-                    preparedStatement.setString(5, organizador);
-                    preparedStatement.setString(6, ubicacion);
+    
+        try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
+            // Validar datos antes de realizar la inserción
+            if (nombre == null || descripcion == null || fecha == null || tipoevento == null || organizador == null || ubicacion == null) {
+                System.out.println("Por favor, complete todos los campos antes de registrar el evento");
+                return;
+            }
 
-                    // Ejecutar la consulta de inserción
-                    int filasAfectadas = preparedStatement.executeUpdate();
+            // Crear la consulta de inserción
+            String query = "INSERT INTO Eventos (NombreEvento, Descripcion, Fecha, TipoEvento, OrganizadorID, UbicacionID) VALUES (?, ?, ?, ?, ?, ?)";
 
-                    if (filasAfectadas > 0) {
-                        System.out.println("Evento registrado correctamente en la base de datos");
-                    } else {
-                        System.out.println("No se pudo registrar el evento en la base de datos");
-                    }
+            try (PreparedStatement preparedStatement = conexion.prepareStatement(query)) {
+                // Establecer los parámetros utilizando setXXX según el tipo de datos en la base de datos
+                preparedStatement.setString(1, nombre);
+                preparedStatement.setString(2, descripcion);
+                preparedStatement.setString(3, fecha);
+                preparedStatement.setString(4, tipoevento);
+                preparedStatement.setString(5, organizador);
+                preparedStatement.setString(6, ubicacion);
+
+                // Ejecutar la consulta de inserción
+                int filasAfectadas = preparedStatement.executeUpdate();
+
+                if (filasAfectadas > 0) {
+                    System.out.println("Evento registrado correctamente en la base de datos");
+                } else {
+                    System.out.println("No se pudo registrar el evento en la base de datos");
                 }
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
+            System.err.println("Error al registrar el evento en la base de datos:");
+            e.printStackTrace();
+        }
+
+    }
+    
+    public static void mostrarEventos(DefaultTableModel modeloTabla, String municipioFiltro) {
+        String[] nombresColumnas = {"Nombre", "Descripcion", "Fecha", "Organizador"};
+        String[] registros = new String[4];
+
+        modeloTabla.setRowCount(0);
+        modeloTabla.setColumnIdentifiers(nombresColumnas);
+
+        String sql = "SELECT NombreEvento, Descripcion, Fecha, OrganizadorID FROM eventos WHERE UbicacionID = ?";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA);
+
+            // Usar PreparedStatement para permitir la inserción segura de parámetros
+            try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+                // Establecer el valor para el marcador de posición utilizando el texto del JTextField
+                preparedStatement.setString(1, municipioFiltro);
+
+                // Ejecutar la consulta
+                ResultSet resultado = preparedStatement.executeQuery();
+
+                // Procesar el resultado
+                while (resultado.next()) {
+                    // ... procesar el resultado
+                    registros[0] = resultado.getString("NombreEvento");
+                    registros[1] = resultado.getString("Descripcion");
+                    registros[2] = resultado.getString("Fecha");
+                    registros[3] = resultado.getString("OrganizadorID");
+
+                    modeloTabla.addRow(registros);
+                }
+
+                // Cerrar recursos
+                resultado.close();
+            }
+
+            conexion.close();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    
-    public static void mostrarEventos() {
-        
-        DefaultTableModel meventos = new DefaultTableModel();
-        meventos.addColumn("NOMBRE");
-        meventos.addColumn("DESCRIPCIÓN");
-        meventos.addColumn("FECHA");
-        meventos.addColumn("TIPO");
-        meventos.addColumn("ORGANIZADOR");
-        meventos.addColumn("UBICACIÓN");
-        
-        
-        
-        
-        
-        
-        
-        
-        /*try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Ahora establezco la conexión
-            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
-                // Preparo una petición a la base de datos
-                Statement peticion = conexion.createStatement();
-                // A continuación le pedimos algo a una base de datos 
-                ResultSet resultado = peticion.executeQuery("SELECT NombreEvento, Descripcion, Fecha, Tipoevento, Organizador FROM eventos WHERE Ubicacion = Ubicacion;");
-
-                // Mientras el resultado tenga líneas, agrega los nombres al modelo de lista
-                while (resultado.next()) {
-                    System.out.println(resultado.getString(1));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-    }
-    
-    
-    
-    
-    
-   
 }
+
+    
+
