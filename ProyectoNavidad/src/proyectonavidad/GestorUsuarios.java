@@ -7,8 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.table.DefaultTableModel;
+
 
 public class GestorUsuarios {
 
@@ -19,11 +18,11 @@ public class GestorUsuarios {
     public static void registrarUsuario(String nombre, String apellidos, String correo, String telefono, String municipio, String tipoUsuario) {
         try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
             // Validar datos antes de realizar la inserción
-            if (nombre == null || apellidos == null || correo == null || telefono == null || municipio == null || tipoUsuario == null) {
-                System.out.println("Por favor, complete todos los campos antes de registrar el usuario");
-                return;
+            if (nombre == null || apellidos == null || correo == null || telefono == null || municipio == null || tipoUsuario == null ||
+            nombre.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || telefono.isEmpty() || municipio.isEmpty() || tipoUsuario.isEmpty()) {
+            System.out.println("Por favor, complete todos los campos antes de registrar el usuario");
+            return;
             }
-
             // Crear la consulta de inserción
             String query = "INSERT INTO usuarios (Nombre, Apellidos, CorreoElectronico, TelefonoMovil, Municipio, TipoUsuario) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -52,26 +51,6 @@ public class GestorUsuarios {
 
     }
         
-    // con este codigo lo saco por consola
-    /*public static void listaDonantes() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Ahora establezco la conexión
-            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
-                // Preparo una petición a la base de datos
-                Statement peticion = conexion.createStatement();
-                // A continuación le pedimos algo a una base de datos 
-                ResultSet resultado = peticion.executeQuery("SELECT Nombre, Apellidos FROM usuarios WHERE TipoUsuario = 'Donante';");
-                // Mientras el resultado tenga líneas, agrega los nombres al modelo de lista
-                while (resultado.next()) {
-                    System.out.println(resultado.getString(1));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
-    
     public static void listaDonantes(DefaultListModel<String> listModel) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -83,10 +62,8 @@ public class GestorUsuarios {
                 ResultSet resultado = peticion.executeQuery("SELECT Nombre, Apellidos FROM usuarios WHERE TipoUsuario = 'Donante';");
                 // Mientras el resultado tenga líneas, agrega los nombres y apellidos al modelo de lista
                 while (resultado.next()) {
-                    //He verificado que si salen por consola
+                    
                     System.out.println(resultado.getString("Nombre") + " | " + resultado.getString("Apellidos"));
-
-                    //No me salen en el jList
                     String nombreCompleto = resultado.getString("Nombre") + " " + resultado.getString("Apellidos");
                     listModel.addElement(nombreCompleto);
                 }
@@ -95,33 +72,6 @@ public class GestorUsuarios {
                 e.printStackTrace();
             }
         }
-
-    public static void borrarUsuario(String nombreUsuario) {
-        String url = "jdbc:mysql://localhost:3306/zonasolidaria";
-        String usuarioDB = "zonasolidaria";
-        String contrasenaDB = "zonasolidaria";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            try (Connection conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA)) {
-                String sql = "DELETE FROM usuarios WHERE Nombre = ?";
-                try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
-                    preparedStatement.setString(1, nombreUsuario);
-
-                    int filasAfectadas = preparedStatement.executeUpdate();
-
-                    if (filasAfectadas > 0) {
-                        System.out.println("Usuario eliminado correctamente");
-                    } else {
-                        System.out.println("No se encontró el usuario o no se pudo eliminar");
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }
 
