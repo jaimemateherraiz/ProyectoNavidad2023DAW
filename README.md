@@ -20,3 +20,5 @@ ZonaSolidaria busca mejorar el mundo al promover la participación en eventos so
 - Java 8 o superior
 - MySQL
 
+## Vídeo explicativo
+https://www.youtube.com/watch?v=lbRMz0ix_1Q&t=606s
