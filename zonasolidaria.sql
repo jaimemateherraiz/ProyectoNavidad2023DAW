@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-01-2024 a las 14:56:45
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 21-01-2024 a las 16:41:08
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,10 +31,22 @@ CREATE TABLE `eventos` (
   `EventoID` int(11) NOT NULL,
   `NombreEvento` varchar(100) NOT NULL,
   `Descripcion` text NOT NULL,
-  `FechaHora` datetime NOT NULL,
+  `Fecha` date NOT NULL,
+  `Tipoevento` varchar(255) NOT NULL,
   `OrganizadorID` int(11) NOT NULL,
   `UbicacionID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='En esta tabla guardaremos los usuarios';
+
+--
+-- Volcado de datos para la tabla `eventos`
+--
+
+INSERT INTO `eventos` (`EventoID`, `NombreEvento`, `Descripcion`, `Fecha`, `Tipoevento`, `OrganizadorID`, `UbicacionID`) VALUES
+(10, 'Operación Alimentaria Solidaria', 'Recolección de alimentos para ayudar a quienes más lo necesitan.', '2023-02-15', 'Campaña de Recolección de Alimentos', 2, 6917),
+(11, 'Calidez Invernal', 'Ayuda a las personas sin hogar donando ropa de abrigo.', '2023-03-20', 'Campaña de Donación de Ropa', 62, 6917),
+(12, 'Patas Felices', 'Colaboración con refugios para mejorar las condiciones de los animales.', '2023-05-15', 'Apoyo a Refugios de Animales', 215, 6901),
+(13, 'EcoSwap', 'Evento para intercambiar materiales de segunda mano y promover la sostenibilidad.', '2023-05-20', 'Apoyo a Refugios de Animales', 8, 6901),
+(14, 'Mano Amiga', 'Proporciona asistencia a personas mayores de tu comunidad.', '2023-05-20', 'Recaudación de Fondos para Organizaciones Benéficas Locales', 4, 6901);
 
 -- --------------------------------------------------------
 
@@ -16317,11 +16329,177 @@ CREATE TABLE `usuarios` (
   `UsuarioID` int(11) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Apellidos` varchar(50) NOT NULL,
-  `Municipio` varchar(20) NOT NULL,
   `CorreoElectronico` varchar(100) NOT NULL,
-  `TipoUsuario` enum('Donante','Organizador') NOT NULL,
-  `FechaRegistro` timestamp NOT NULL DEFAULT current_timestamp()
+  `TelefonoMovil` varchar(100) NOT NULL,
+  `Municipio` varchar(20) NOT NULL,
+  `TipoUsuario` enum('Donante','Organizador') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`UsuarioID`, `Nombre`, `Apellidos`, `CorreoElectronico`, `TelefonoMovil`, `Municipio`, `TipoUsuario`) VALUES
+(2, 'Jaime', 'Maté Herráiz', 'jaime98mh@gmail.com', '689711207', 'Navalcarnero', 'Organizador'),
+(3, 'Pepito', 'Palotes', 'pepipalotes@gmail.com', '623456789', 'Madrid', 'Donante'),
+(4, 'Carlos', 'González', 'carlosgonzalez001@gmail.com', '612345678', 'Madrid', 'Donante'),
+(5, 'Laura', 'Fernández', 'laurafernandez002@gmail.com', '623456789', 'Madrid', 'Donante'),
+(6, 'Roberto', 'Sánchez', 'robertosanchez003@gmail.com', '634567890', 'Madrid', 'Donante'),
+(7, 'Elena', 'Martín', 'elenamartin004@gmail.com', '645678901', 'Madrid', 'Donante'),
+(8, 'Javier', 'Pérez', 'javierperez005@gmail.com', '656789012', 'Madrid', 'Donante'),
+(9, 'Sara', 'López', 'saralopez006@gmail.com', '667890123', 'Madrid', 'Donante'),
+(10, 'Alejandro', 'Hernández', 'alejandrohernandez007@gmail.com', '678901234', 'Madrid', 'Donante'),
+(11, 'Carmen', 'Díaz', 'carmendiaz008@gmail.com', '689012345', 'Madrid', 'Donante'),
+(12, 'Miguel', 'Ruiz', 'miguelruiz009@gmail.com', '690123456', 'Madrid', 'Donante'),
+(13, 'Patricia', 'Santos', 'patriciasantos010@gmail.com', '601234567', 'Madrid', 'Donante'),
+(14, 'Daniel', 'Rodríguez', 'danielrodriguez011@gmail.com', '612345678', 'Madrid', 'Donante'),
+(15, 'Alicia', 'Gutiérrez', 'aliciagutierrez012@gmail.com', '623456789', 'Madrid', 'Donante'),
+(16, 'Fernando', 'Ortega', 'fernandoortega013@gmail.com', '634567890', 'Madrid', 'Donante'),
+(17, 'Natalia', 'Vega', 'nataliavega014@gmail.com', '645678901', 'Madrid', 'Donante'),
+(18, 'Hugo', 'Ramos', 'hugoramos015@gmail.com', '656789012', 'Madrid', 'Donante'),
+(19, 'Silvia', 'Moreno', 'silviamoreno016@gmail.com', '667890123', 'Madrid', 'Donante'),
+(20, 'Jorge', 'Cruz', 'jorgecruz017@gmail.com', '678901234', 'Madrid', 'Donante'),
+(21, 'Rosa', 'Jiménez', 'rosajimenez018@gmail.com', '689012345', 'Madrid', 'Donante'),
+(22, 'Pedro', 'Blanco', 'pedroblanco019@gmail.com', '690123456', 'Madrid', 'Donante'),
+(23, 'Cristina', 'Castro', 'cristinacastro020@gmail.com', '601234567', 'Madrid', 'Donante'),
+(24, 'Eva', 'Góngora', 'evagongora021@gmail.com', '612345678', 'Madrid', 'Donante'),
+(25, 'Adrián', 'Molina', 'adrianmolina022@gmail.com', '623456789', 'Madrid', 'Donante'),
+(26, 'Lucía', 'Herrera', 'luciaherrera023@gmail.com', '634567890', 'Madrid', 'Donante'),
+(27, 'Gabriel', 'Delgado', 'gabrieldelgado024@gmail.com', '645678901', 'Madrid', 'Donante'),
+(28, 'Nerea', 'Vidal', 'nereavidal025@gmail.com', '656789012', 'Madrid', 'Donante'),
+(29, 'Álvaro', 'Cortés', 'alvarocortes026@gmail.com', '667890123', 'Madrid', 'Donante'),
+(30, 'Emma', 'Rojas', 'emmarojas027@gmail.com', '678901234', 'Madrid', 'Donante'),
+(31, 'Iván', 'Serrano', 'ivanserrano028@gmail.com', '689012345', 'Madrid', 'Donante'),
+(32, 'Lorena', 'Benítez', 'lorenabenitez029@gmail.com', '690123456', 'Madrid', 'Donante'),
+(33, 'Mario', 'Cabrera', 'mariocabrera030@gmail.com', '601234567', 'Madrid', 'Donante'),
+(34, 'David', 'Santamaría', 'davidsantamaria031@gmail.com', '612345678', 'Alcalá de Henares', 'Donante'),
+(35, 'Laura', 'Romero', 'lauraromero032@gmail.com', '623456789', 'Parla', 'Donante'),
+(36, 'Miguel', 'Guerrero', 'miguelguerrero033@gmail.com', '634567890', 'Getafe', 'Donante'),
+(37, 'Elena', 'Hernández', 'elenahernandez034@gmail.com', '645678901', 'Majadahonda', 'Donante'),
+(38, 'Javier', 'Serrano', 'javierserrano035@gmail.com', '656789012', 'Collado Villalba', 'Donante'),
+(39, 'Ana', 'González', 'anagonzalez036@gmail.com', '667890123', 'Alcorcón', 'Donante'),
+(40, 'Diego', 'Pérez', 'diegoperez037@gmail.com', '678901234', 'Coslada', 'Donante'),
+(41, 'Sara', 'Martín', 'saramartin038@gmail.com', '689012345', 'Torrejón de Ardoz', 'Donante'),
+(42, 'Iván', 'Moreno', 'ivanmoreno039@gmail.com', '690123456', 'Boadilla del Monte', 'Donante'),
+(43, 'Cristina', 'López', 'cristinalopez040@gmail.com', '601234567', 'Las Rozas de Madrid', 'Donante'),
+(44, 'Andrea', 'Gómez', 'andreagomez041@gmail.com', '612345678', 'Sevilla', 'Donante'),
+(45, 'Francisco', 'Martínez', 'franciscomartinez042@gmail.com', '623456789', 'Zaragoza', 'Donante'),
+(46, 'Rocío', 'Fernández', 'rociofernandez043@gmail.com', '634567890', 'Valencia', 'Donante'),
+(47, 'Alberto', 'López', 'albertolopez044@gmail.com', '645678901', 'Barcelona', 'Donante'),
+(48, 'Nuria', 'Sánchez', 'nuriasanchez045@gmail.com', '656789012', 'Granada', 'Donante'),
+(49, 'Víctor', 'Pérez', 'victorperez046@gmail.com', '667890123', 'Bilbao', 'Donante'),
+(50, 'Eva', 'Rodríguez', 'evarodriguez047@gmail.com', '678901234', 'Alicante', 'Donante'),
+(51, 'Javier', 'González', 'javiergonzalez048@gmail.com', '689012345', 'Vigo', 'Donante'),
+(52, 'Carmen', 'Hernández', 'carmenhernandez049@gmail.com', '690123456', 'Toledo', 'Donante'),
+(53, 'Miguel', 'Ruiz', 'miguelruiz050@gmail.com', '601234567', 'Oviedo', 'Donante'),
+(54, 'Lucía', 'Gómez', 'luciagomez051@gmail.com', '612345678', 'Ávila', 'Donante'),
+(55, 'Antonio', 'Martín', 'antoniomartin052@gmail.com', '623456789', 'Arévalo', 'Donante'),
+(56, 'Laura', 'Sánchez', 'laurasanchez053@gmail.com', '634567890', 'El Tiemblo', 'Donante'),
+(57, 'Javier', 'López', 'javierlopez054@gmail.com', '645678901', 'Cebreros', 'Donante'),
+(58, 'Carmen', 'Pérez', 'carmenperez055@gmail.com', '656789012', 'Arenas de San Pedro', 'Donante'),
+(59, 'Juan', 'Hernández', 'juanhernandez056@gmail.com', '667890123', 'Candeleda', 'Donante'),
+(60, 'Marta', 'Rodríguez', 'martarodriguez057@gmail.com', '678901234', 'Crespos', 'Donante'),
+(61, 'Diego', 'González', 'diegogonzalez058@gmail.com', '689012345', 'Navaluenga', 'Donante'),
+(62, 'Sofía', 'Serrano', 'sofiaserrano059@gmail.com', '690123456', 'El Barraco', 'Donante'),
+(63, 'Adrián', 'Fernández', 'adrianfernandez060@gmail.com', '601234567', 'Sotillo de la Adrada', 'Donante'),
+(64, 'Xoán', 'López', 'xoanlopez061@gmail.com', '612345678', 'Santiago de Composte', 'Donante'),
+(65, 'Ana', 'Martínez', 'anamartinez062@gmail.com', '623456789', 'Vigo', 'Donante'),
+(66, 'Manuel', 'García', 'manuelgarcia063@gmail.com', '634567890', 'A Coruña', 'Donante'),
+(67, 'Carmen', 'Rodríguez', 'carmenrodriguez064@gmail.com', '645678901', 'Lugo', 'Donante'),
+(68, 'Pedro', 'Sánchez', 'pedrosanchez065@gmail.com', '656789012', 'Ourense', 'Donante'),
+(69, 'Isabel', 'Fernández', 'isabelfernandez066@gmail.com', '667890123', 'Pontevedra', 'Donante'),
+(70, 'Javier', 'Pérez', 'javierperez067@gmail.com', '678901234', 'Ferrol', 'Donante'),
+(71, 'Sara', 'González', 'saragonzalez068@gmail.com', '689012345', 'Lalín', 'Donante'),
+(72, 'Antonio', 'Hernández', 'antoniohernandez069@gmail.com', '690123456', 'Ribeira', 'Donante'),
+(73, 'Laura', 'Díaz', 'lauradiaz070@gmail.com', '601234567', 'Vilagarcía de Arousa', 'Donante'),
+(74, 'Miguel', 'Martínez', 'miguelmartinez071@gmail.com', '612345678', 'Oleiros', 'Donante'),
+(75, 'Elena', 'Gómez', 'elenagomez072@gmail.com', '623456789', 'Culleredo', 'Donante'),
+(76, 'Diego', 'Fernández', 'diegofernandez073@gmail.com', '634567890', 'Narón', 'Donante'),
+(77, 'María', 'Sánchez', 'mariasanchez074@gmail.com', '645678901', 'Vilalba', 'Donante'),
+(78, 'Pablo', 'Pérez', 'pabloperez075@gmail.com', '656789012', 'Carballo', 'Donante'),
+(79, 'Cristina', 'González', 'cristinagonzalez076@gmail.com', '667890123', 'Allariz', 'Donante'),
+(80, 'Adrián', 'Rodríguez', 'adrianrodriguez077@gmail.com', '678901234', 'Verín', 'Donante'),
+(81, 'Lorena', 'Hernández', 'lorenahernandez078@gmail.com', '689012345', 'Tui', 'Donante'),
+(82, 'Daniel', 'Serrano', 'danielserrano079@gmail.com', '690123456', 'Monforte de Lemos', 'Donante'),
+(83, 'Natalia', 'López', 'natalialopez080@gmail.com', '601234567', 'Betanzos', 'Donante'),
+(84, 'Manuel', 'Gómez', 'manuelgomez081@gmail.com', '612345678', 'Mérida', 'Donante'),
+(85, 'Sara', 'Martín', 'saramartin082@gmail.com', '623456789', 'Cáceres', 'Donante'),
+(86, 'Juan', 'Hernández', 'juanhernandez083@gmail.com', '634567890', 'Badajoz', 'Donante'),
+(87, 'Laura', 'Rodríguez', 'laurarodriguez084@gmail.com', '645678901', 'Plasencia', 'Donante'),
+(88, 'Francisco', 'Sánchez', 'franciscosanchez085@gmail.com', '656789012', 'Almendralejo', 'Donante'),
+(89, 'Ana', 'López', 'analopez086@gmail.com', '667890123', 'Don Benito', 'Donante'),
+(90, 'Javier', 'Pérez', 'javierperez087@gmail.com', '678901234', 'Villanueva de la Ser', 'Donante'),
+(91, 'Marta', 'González', 'martagonzalez088@gmail.com', '689012345', 'Zafra', 'Donante'),
+(92, 'Daniel', 'Fernández', 'danielfernandez089@gmail.com', '690123456', 'Navalmoral de la Mat', 'Donante'),
+(93, 'Carmen', 'García', 'carmengarcia090@gmail.com', '601234567', 'Jerez de los Caballe', 'Donante'),
+(94, 'Pedro', 'Rodríguez', 'pedrorodriguez091@gmail.com', '612345678', 'Olivenza', 'Donante'),
+(95, 'Elena', 'Serrano', 'elenaserrano092@gmail.com', '623456789', 'Montijo', 'Donante'),
+(96, 'Adrián', 'Hernández', 'adrianhernandez093@gmail.com', '634567890', 'Coria', 'Donante'),
+(97, 'Natalia', 'Martínez', 'nataliamartinez094@gmail.com', '645678901', 'Trujillo', 'Donante'),
+(98, 'Iván', 'López', 'ivanlopez095@gmail.com', '656789012', 'Moraleja', 'Donante'),
+(99, 'Laura', 'Pérez', 'lauraperez096@gmail.com', '667890123', 'Castuera', 'Donante'),
+(100, 'Antonio', 'González', 'antoniogonzalez097@gmail.com', '678901234', 'Miajadas', 'Donante'),
+(101, 'María', 'Sánchez', 'mariasanchez098@gmail.com', '689012345', 'Fuente de Cantos', 'Donante'),
+(102, 'Jorge', 'Martín', 'jorgemartin099@gmail.com', '690123456', 'Llerena', 'Donante'),
+(103, 'Lorena', 'Gómez', 'lorenagomez100@gmail.com', '601234567', 'Alburquerque', 'Donante'),
+(164, 'Manuel', 'Gómez', 'manuelgomez101@gmail.com', '612345678', 'Sevilla', 'Donante'),
+(165, 'Sara', 'Martín', 'saramartin102@gmail.com', '623456789', 'Málaga', 'Donante'),
+(166, 'Juan', 'Hernández', 'juanhernandez103@gmail.com', '634567890', 'Córdoba', 'Donante'),
+(167, 'Laura', 'Rodríguez', 'laurarodriguez104@gmail.com', '645678901', 'Granada', 'Donante'),
+(168, 'Francisco', 'Sánchez', 'franciscosanchez105@gmail.com', '656789012', 'Jerez de la Frontera', 'Donante'),
+(169, 'Ana', 'López', 'analopez106@gmail.com', '667890123', 'Mariana', 'Donante'),
+(170, 'Javier', 'Pérez', 'javierperez107@gmail.com', '678901234', 'Almería', 'Donante'),
+(171, 'Marta', 'González', 'martagonzalez108@gmail.com', '689012345', 'Huelva', 'Donante'),
+(172, 'Daniel', 'Fernández', 'danielfernandez109@gmail.com', '690123456', 'Cádiz', 'Donante'),
+(173, 'Carmen', 'García', 'carmengarcia110@gmail.com', '601234567', 'Jaén', 'Donante'),
+(174, 'Pedro', 'Rodríguez', 'pedrorodriguez111@gmail.com', '612345678', 'Algeciras', 'Donante'),
+(175, 'Elena', 'Serrano', 'elenaserrano112@gmail.com', '623456789', 'Torremolinos', 'Donante'),
+(176, 'Adrián', 'Hernández', 'adrianhernandez113@gmail.com', '634567890', 'Ronda', 'Donante'),
+(177, 'Natalia', 'Martínez', 'nataliamartinez114@gmail.com', '645678901', 'Antequera', 'Donante'),
+(178, 'Iván', 'López', 'ivanlopez115@gmail.com', '656789012', 'Dos Hermanas', 'Donante'),
+(179, 'Laura', 'Pérez', 'lauraperez116@gmail.com', '667890123', 'Alcalá de Guadaíra', 'Donante'),
+(180, 'Antonio', 'González', 'antoniogonzalez117@gmail.com', '678901234', 'El Ejido', 'Donante'),
+(181, 'María', 'Sánchez', 'mariasanchez118@gmail.com', '689012345', 'Chiclana de la Front', 'Donante'),
+(182, 'Jorge', 'Martín', 'jorgemartin119@gmail.com', '690123456', 'Lepe', 'Donante'),
+(183, 'Lorena', 'Gómez', 'lorenagomez120@gmail.com', '601234567', 'Fuengirola', 'Donante'),
+(184, 'Marc', 'Gómez', 'marcgomez121@gmail.com', '612345678', 'Barcelona', 'Donante'),
+(185, 'Anna', 'Martínez', 'annamartinez122@gmail.com', '623456789', 'LHospitalet de Llobr', 'Donante'),
+(186, 'Pau', 'Hernández', 'pauhernandez123@gmail.com', '634567890', 'Badalona', 'Donante'),
+(187, 'Laura', 'Rodríguez', 'laurarodriguez124@gmail.com', '645678901', 'Terrassa', 'Donante'),
+(188, 'Xavier', 'Sánchez', 'xaviersanchez125@gmail.com', '656789012', 'Sabadell', 'Donante'),
+(189, 'Núria', 'López', 'nurialopez126@gmail.com', '667890123', 'Santa Coloma de Gram', 'Donante'),
+(190, 'Jordi', 'Pérez', 'jordiperez127@gmail.com', '678901234', 'Cornellà de Llobrega', 'Donante'),
+(191, 'Marta', 'González', 'martagonzalez128@gmail.com', '689012345', 'Sant Boi de Llobrega', 'Donante'),
+(192, 'David', 'Fernández', 'davidfernandez129@gmail.com', '690123456', 'Manresa', 'Donante'),
+(193, 'Clara', 'García', 'claragarcia130@gmail.com', '601234567', 'Lleida', 'Donante'),
+(194, 'Sergi', 'Rodríguez', 'sergirodriguez131@gmail.com', '612345678', 'Girona', 'Donante'),
+(195, 'Eva', 'Serrano', 'evaserrano132@gmail.com', '623456789', 'Reus', 'Donante'),
+(196, 'Carles', 'Hernández', 'carleshernandez133@gmail.com', '634567890', 'Tarragona', 'Donante'),
+(197, 'Laia', 'Martínez', 'laiamartinez134@gmail.com', '645678901', 'Sant Cugat del Vallè', 'Donante'),
+(198, 'Pol', 'López', 'pollopez135@gmail.com', '656789012', 'Mataró', 'Donante'),
+(199, 'Clàudia', 'Pérez', 'claudiaperez136@gmail.com', '667890123', 'Badajoz', 'Donante'),
+(200, 'Àlex', 'González', 'alexgonzalez137@gmail.com', '678901234', 'Tàrrega', 'Donante'),
+(201, 'Maria', 'Sánchez', 'mariasanchez138@gmail.com', '689012345', 'Igualada', 'Donante'),
+(202, 'Jordina', 'Martín', 'jordinamartin139@gmail.com', '690123456', 'Vic', 'Donante'),
+(203, 'Guillem', 'Gómez', 'guillemgomez140@gmail.com', '601234567', 'Vilafranca del Pened', 'Donante'),
+(204, 'Elena', 'Fernández', 'elenafernandez141@gmail.com', '612345678', 'Gijón', 'Organizador'),
+(205, 'José', 'López', 'joselopez142@gmail.com', '623456789', 'Murcia', 'Organizador'),
+(206, 'Cristina', 'García', 'cristinagarcia143@gmail.com', '634567890', 'Logroño', 'Organizador'),
+(207, 'Miguel', 'Serrano', 'miguelserrano144@gmail.com', '645678901', 'Valencia', 'Organizador'),
+(208, 'Ana', 'Martínez', 'anamartinez145@gmail.com', '656789012', 'Sevilla', 'Organizador'),
+(209, 'Carlos', 'Rodríguez', 'carlosrodriguez146@gmail.com', '667890123', 'Madrid', 'Organizador'),
+(210, 'Laura', 'Pérez', 'lauraperez147@gmail.com', '678901234', 'Zaragoza', 'Organizador'),
+(211, 'David', 'González', 'davidgonzalez148@gmail.com', '689012345', 'Barcelona', 'Organizador'),
+(212, 'Sara', 'Hernández', 'sarahernandez149@gmail.com', '690123456', 'Valladolid', 'Organizador'),
+(213, 'Javier', 'Martín', 'javiermartin150@gmail.com', '601234567', 'Bilbao', 'Organizador'),
+(215, 'Jose Vicente', 'Carratala', 'josevicente123@gmail.com', '612312312', 'Madrid', 'Organizador'),
+(218, 'Roberto', 'Robertico', 'roberticorober123@gmail.com', '658932144', 'El alamo', 'Donante'),
+(222, 'Sofia', 'Sofisticada', 'sofisticada345@gmail.com', '647845961', 'Navalcarnero', 'Organizador'),
+(224, 'Jaime', 'Mate Herraiz', 'jaiemmate567@gmail.com', '699999958', 'Navalcarnero', 'Organizador'),
+(225, 'Ana', 'Herráiz', 'anaherraiz123@gmail.com', '625255255', 'Navalcarnero', 'Donante'),
+(226, 'Jaime', 'Mater', 'jaimemater@gmail.com', '612312312', 'Navalcarnero', 'Organizador'),
+(227, 'Jaime', 'Mate Serrano', 'jaimemate564@gmail.com', '614514514', 'Navalcarnero', 'Organizador'),
+(228, 'Pepito', 'Perez', 'pepiperez@gmail,com', '674745745', 'Mostoles', 'Organizador');
 
 --
 -- Índices para tablas volcadas
@@ -16356,7 +16534,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `EventoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `EventoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `ubicacion`
@@ -16368,7 +16546,7 @@ ALTER TABLE `ubicacion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `UsuarioID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UsuarioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
 -- Restricciones para tablas volcadas
