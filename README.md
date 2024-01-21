@@ -1,5 +1,3 @@
-# ProyectoNavidad2023DAW
-
 # ZonaSolidaria
 
 ZonaSolidaria es una aplicación que fomenta la participación en eventos solidarios y facilita su organización. La plataforma conecta a personas comprometidas con causas benéficas con eventos locales, fortaleciendo el tejido social de nuestras comunidades.
