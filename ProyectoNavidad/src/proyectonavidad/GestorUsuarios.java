@@ -28,7 +28,7 @@ public class GestorUsuarios {
 
             try (PreparedStatement preparedStatement = conexion.prepareStatement(query)) {
                 // Establecer los parámetros utilizando setXXX según el tipo de datos en la base de datos
-                preparedStatement.setString(1, nombre);
+                    preparedStatement.setString(1, nombre);
                     preparedStatement.setString(2, apellidos);
                     preparedStatement.setString(3, correo);
                     preparedStatement.setString(4, telefono);

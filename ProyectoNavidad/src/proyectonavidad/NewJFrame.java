@@ -39,7 +39,7 @@ public class NewJFrame extends javax.swing.JFrame {
         eslogan = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        buttonUnirse = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         campoNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -52,7 +52,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         campoMunicipio = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonRegistrarse = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
@@ -78,7 +78,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jTextFieldMunicipio = new javax.swing.JTextField();
-        buscarMunicipio = new javax.swing.JButton();
+        buttonBuscarMunicipio = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaEventos = new javax.swing.JTable();
         botonEliminarEvento = new javax.swing.JButton();
@@ -88,7 +88,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        botonLista = new javax.swing.JButton();
+        buttonVerLista = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaDonantes = new javax.swing.JList<>();
 
@@ -128,10 +128,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel3.setLabelFor(jPanel2);
         jLabel3.setText("<html><p><strong>¿Qué es ZonaSolidaria?</strong><br><br> Es un espacio donde la generosidad se convierte en acción concreta. Imagina un lugar donde cada pequeño gesto cuenta, donde tu contribución local puede tener un impacto global. Desde donar artículos esenciales hasta ofrecer tu tiempo y habilidades</p></html>");
 
-        jToggleButton1.setText("Pulsa y unete!");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonUnirse.setText("Pulsa y unete!");
+        buttonUnirse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                buttonUnirseActionPerformed(evt);
             }
         });
 
@@ -161,10 +161,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel9.setText("Indique si es donante u organizador:");
 
-        jButton1.setText("Registrarse");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonRegistrarse.setText("Registrarse");
+        buttonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonRegistrarseActionPerformed(evt);
             }
         });
 
@@ -180,7 +180,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(buttonRegistrarse)
                 .addGap(22, 22, 22))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +231,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(buttonRegistrarse)
                         .addGap(18, 18, 18)))
                 .addComponent(jLabel4)
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -260,7 +260,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(eslogan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(buttonUnirse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -274,7 +274,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonUnirse, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -444,10 +444,10 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        buscarMunicipio.setText("Buscar");
-        buscarMunicipio.addActionListener(new java.awt.event.ActionListener() {
+        buttonBuscarMunicipio.setText("Buscar");
+        buttonBuscarMunicipio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarMunicipioActionPerformed(evt);
+                buttonBuscarMunicipioActionPerformed(evt);
             }
         });
 
@@ -497,7 +497,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscarMunicipio)
+                                .addComponent(buttonBuscarMunicipio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -514,7 +514,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscarMunicipio)
+                    .addComponent(buttonBuscarMunicipio)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
                     .addComponent(botonEliminarEvento)
@@ -552,10 +552,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("LISTA DE TODOS LOS DONANTES");
 
-        botonLista.setText("Ver");
-        botonLista.addActionListener(new java.awt.event.ActionListener() {
+        buttonVerLista.setText("Ver");
+        buttonVerLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonListaActionPerformed(evt);
+                buttonVerListaActionPerformed(evt);
             }
         });
 
@@ -575,7 +575,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(47, 47, 47))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(109, 109, 109)
-                .addComponent(botonLista)
+                .addComponent(buttonVerLista)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -586,7 +586,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonLista)
+                .addComponent(buttonVerLista)
                 .addContainerGap())
         );
 
@@ -641,10 +641,9 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void buttonUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUnirseActionPerformed
         jPanel2.setVisible(true);
-
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_buttonUnirseActionPerformed
 
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
         // TODO add your handling code here:
@@ -654,9 +653,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoApellidosActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarseActionPerformed
         jPanel2.setVisible(false);
-        jLabel20.setText("Tu registro se ha completado.");
+        //jLabel20.setText("Tu registro se ha completado.");
         
         String nombreusuario = campoNombre.getText();
         String apellidos = campoApellidos.getText();
@@ -673,10 +672,9 @@ public class NewJFrame extends javax.swing.JFrame {
             // Todos los campos tienen contenido
             jLabel20.setText("Tu registro se ha completado correctamente.");
             
-
             gestorUsuarios.registrarUsuario(nombreusuario, apellidos, correoElectronico, telefonoMovil, municipio, tipoUsuario);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonRegistrarseActionPerformed
 
     private void buttonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearActionPerformed
         
@@ -697,11 +695,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
             // Llamar al método para registrar el evento
             gestorEventos.registrarEvento(nombreeventos, descripcion, fecha, tipoEvento, organizador, ubicacion);
+            
             // Limpiar los campos después de registrar el evento
             campoNombreEvento.setText("");
             campoDescripcion.setText("");
             campoFecha.setText("");
-            comboTipoEvento.setSelectedIndex(0); // Establecer el índice del combo a 0 o el valor deseado
+            comboTipoEvento.setSelectedIndex(0); 
             campoOrganizador.setText("");
             campoUbicacion.setText("");
         }
@@ -716,17 +715,16 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNombreEventoActionPerformed
 
-    private void botonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaActionPerformed
+    private void buttonVerListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerListaActionPerformed
     gestorUsuarios.listaDonantes(list);
-    listaDonantes.setModel(list);
-        
-    }//GEN-LAST:event_botonListaActionPerformed
+    listaDonantes.setModel(list);      
+    }//GEN-LAST:event_buttonVerListaActionPerformed
 
     private void jTextFieldMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMunicipioActionPerformed
         
     }//GEN-LAST:event_jTextFieldMunicipioActionPerformed
 
-    private void buscarMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMunicipioActionPerformed
+    private void buttonBuscarMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarMunicipioActionPerformed
         String municipioFiltro = jTextFieldMunicipio.getText();
         
         // Verificar si el campo está vacío
@@ -741,10 +739,10 @@ public class NewJFrame extends javax.swing.JFrame {
             gestorEventos.mostrarEventos(modeloTabla, municipioFiltro);
             tablaEventos.setModel(modeloTabla);
     }
-    }//GEN-LAST:event_buscarMunicipioActionPerformed
+    }//GEN-LAST:event_buttonBuscarMunicipioActionPerformed
 
     private void botonEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarEventoActionPerformed
-            // Obtener la fila seleccionada en la tabla
+        // Obtener la fila seleccionada en la tabla
         int filaSeleccionada = tablaEventos.getSelectedRow();
 
         // Verificar si hay una fila seleccionada
@@ -804,10 +802,12 @@ public class NewJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
     private javax.swing.JButton botonEliminarEvento;
-    private javax.swing.JButton botonLista;
-    private javax.swing.JButton buscarMunicipio;
+    private javax.swing.JButton buttonBuscarMunicipio;
     private javax.swing.JButton buttonCrear;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton buttonRegistrarse;
+    private javax.swing.JToggleButton buttonUnirse;
+    private javax.swing.JButton buttonVerLista;
     private javax.swing.JTextField campoApellidos;
     private javax.swing.JTextField campoCorreo;
     private javax.swing.JTextField campoDescripcion;
@@ -821,7 +821,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JComboBox<String> comboTipoEvento;
     private javax.swing.JLabel eslogan;
-    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -859,7 +858,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextFieldMunicipio;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JList<String> listaDonantes;
     public javax.swing.JTable tablaEventos;
     // End of variables declaration//GEN-END:variables
